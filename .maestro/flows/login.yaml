@@ -1,0 +1,13 @@
+appId: host.exp.Exponent
+---
+- assertVisible: "Sign in to start your shift"
+- tapOn:
+    id: "email"
+    optional: true
+- inputText: "worker1@jobsite.test"
+- hideKeyboard
+- tapOn: "Password"
+- inputText: "password123"
+- hideKeyboard
+- tapOn: "Sign in"
+- assertVisible: "120 Liberty Street Renovation"

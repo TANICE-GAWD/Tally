@@ -1,0 +1,12 @@
+appId: host.exp.Exponent
+---
+- runFlow: login.yaml
+- assertVisible: "Off the clock"
+- tapOn: "Clock in"
+- assertVisible: "Pick a cost code"
+- tapOn: "Framing"
+- waitForAnimationToEnd
+- assertVisible: "On the clock"
+- assertVisible: "Framing"
+- tapOn: "Clock out"
+- assertVisible: "Off the clock"

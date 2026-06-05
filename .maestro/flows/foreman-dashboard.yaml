@@ -1,0 +1,18 @@
+appId: host.exp.Exponent
+---
+- assertVisible: "Sign in to start your shift"
+- tapOn: "Password"
+- eraseText
+- inputText: "password123"
+- hideKeyboard
+- tapOn: "Email"
+- eraseText
+- inputText: "foreman@jobsite.test"
+- hideKeyboard
+- tapOn: "Sign in"
+- assertVisible: "Dashboard"
+- tapOn: "Dashboard"
+- assertVisible: "Live burn"
+- assertVisible: "Spent to date"
+- assertVisible: "What if"
+- assertVisible: "Export week CSV"
