@@ -1,0 +1,39 @@
+{
+  "expo": {
+    "name": "jobsite-pulse",
+    "slug": "jobsite-pulse",
+    "version": "0.1.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "automatic",
+    "scheme": "jobsitepulse",
+    "newArchEnabled": true,
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.jobsitepulse.app",
+      "infoPlist": {
+        "NSLocationWhenInUseUsageDescription": "Jobsite Pulse uses your location to confirm you are on the jobsite when you clock in or out."
+      }
+    },
+    "android": {
+      "package": "com.jobsitepulse.app",
+      "permissions": [
+        "ACCESS_FINE_LOCATION",
+        "ACCESS_COARSE_LOCATION"
+      ]
+    },
+    "plugins": [
+      "expo-router",
+      "expo-sqlite",
+      [
+        "expo-location",
+        {
+          "locationWhenInUsePermission": "Jobsite Pulse uses your location to confirm you are on the jobsite when you clock in or out."
+        }
+      ],
+      "expo-asset"
+    ],
+    "experiments": {
+      "typedRoutes": true
+    }
+  }
+}
