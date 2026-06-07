@@ -1,7 +1,9 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import {
   ActivityIndicator,
+  Alert,
   ScrollView,
+  Share,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -10,7 +12,8 @@ import {
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { PROJECT_ID, supabase } from '@/lib/supabase';
 import { applyWhatIf, BurnSummary, formatCents, formatPct } from '@/lib/burn';
-import type { CostCode } from '@/types/db';
+import { pairSessions, summarizeSessions, toCsv } from '@/lib/sessions';
+import type { ClockEvent, CostCode } from '@/types/db';
 
 const HOURS_PER_DAY = 8;
 
@@ -23,6 +26,7 @@ export default function Dashboard() {
   const [addedWorkers, setAddedWorkers] = useState(1);
   const [addedDays, setAddedDays] = useState(5);
   const [selectedCodeId, setSelectedCodeId] = useState<string | null>(null);
+  const [exporting, setExporting] = useState(false);
 
   const fetchBurn = useCallback(async () => {
     const { data, error } = await supabase
@@ -116,6 +120,47 @@ export default function Dashboard() {
       rate_cents_per_hour: selectedCode.rate_cents_per_hour
     });
   }, [burn, selectedCode, addedWorkers, addedDays]);
+
+  const onExportWeek = useCallback(async () => {
+    setExporting(true);
+    try {
+      const sevenDaysAgo = new Date(Date.now() - 7 * 24 * 3600 * 1000).toISOString();
+      const { data: events, error: evErr } = await supabase
+        .from('clock_events')
+        .select('id, user_id, project_id, cost_code_id, event_type, event_at, lat, lon, source')
+        .eq('project_id', PROJECT_ID)
+        .gte('event_at', sevenDaysAgo)
+        .order('event_at', { ascending: true });
+      if (evErr) throw evErr;
+
+      const userIds = Array.from(new Set((events ?? []).map((e) => e.user_id)));
+      if (userIds.length === 0) {
+        Alert.alert('Nothing to export', 'No clock events in the last 7 days.');
+        return;
+      }
+      const { data: profiles } = await supabase
+        .from('profiles')
+        .select('id, full_name')
+        .in('id', userIds);
+
+      const labels = new Map((profiles ?? []).map((p) => [p.id as string, p.full_name as string]));
+      const sessions = pairSessions(events as ClockEvent[]);
+      const summary = summarizeSessions(sessions, costCodes);
+      if (summary.length === 0) {
+        Alert.alert('No paired sessions', 'Workers clocked in but no completed sessions yet this week.');
+        return;
+      }
+      const csv = toCsv(summary, (id) => labels.get(id) ?? id);
+      await Share.share({
+        title: 'jobsite-pulse weekly export',
+        message: csv
+      });
+    } catch (e) {
+      Alert.alert('Export failed', String(e));
+    } finally {
+      setExporting(false);
+    }
+  }, [costCodes]);
 
   if (loading || !burn) {
     return (
@@ -246,6 +291,22 @@ export default function Dashboard() {
             </View>
           )}
         </View>
+
+        <View style={styles.card}>
+          <Text style={styles.h2}>Weekly export</Text>
+          <Text style={styles.faint}>
+            CSV of the last 7 days, grouped by worker and cost code. Opens the system share sheet.
+          </Text>
+          <TouchableOpacity
+            style={[styles.exportBtn, exporting && styles.exportBtnDisabled]}
+            onPress={onExportWeek}
+            disabled={exporting}
+          >
+            <Text style={styles.exportBtnText}>
+              {exporting ? 'Building CSV…' : 'Export week CSV'}
+            </Text>
+          </TouchableOpacity>
+        </View>
       </ScrollView>
     </SafeAreaView>
   );
@@ -372,5 +433,14 @@ const styles = StyleSheet.create({
   },
   row: { flexDirection: 'row', justifyContent: 'space-between' },
   rowLabel: { color: '#555' },
-  rowValue: { fontWeight: '600' }
+  rowValue: { fontWeight: '600' },
+  exportBtn: {
+    marginTop: 12,
+    backgroundColor: '#0a7',
+    borderRadius: 10,
+    padding: 14,
+    alignItems: 'center'
+  },
+  exportBtnDisabled: { opacity: 0.5 },
+  exportBtnText: { color: '#fff', fontWeight: '600' }
 });
