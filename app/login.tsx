@@ -45,6 +45,7 @@ export default function Login() {
           autoCapitalize="none"
           autoComplete="email"
           keyboardType="email-address"
+          
           value={email}
           onChangeText={setEmail}
           editable={!submitting}
