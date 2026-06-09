@@ -4,11 +4,11 @@ A phone app for construction crews and the people who pay them.
 
 ## What it does
 
-A carpenter shows up to a jobsite at 7 AM. They open Tally on their phone. The app already knows they have arrived (it can tell from their location), and it asks if they want to clock in. They tap yes, pick the trade they are doing right now (Framing), and get to work. At 11 AM they switch to a different trade (Concrete). One tap. At 3:30 PM they leave the site, the app prompts them to clock out, and they go home.
+A carpenter arrives at a jobsite. Tally detects they have crossed onto the site and prompts a clock-in. They pick a trade (Framing) and get to work. Mid-day they switch to Concrete. One tap. They leave the site, the app prompts them to clock out.
 
-That night, while the worker is asleep, the foreman in the trailer pulls up Tally on their own phone. They see, in real time, the labor cost for every worker on every job that day, broken down by trade, with the burn rate against budget. They tap a button and email themselves a CSV that lines up with what payroll needs on Friday.
+That night, the foreman opens Tally on their own phone. Live labor cost per worker per job, broken down by trade, against budget. One button exports a CSV ready for payroll on Friday.
 
-That is what Tally does. The clever part is in the seams.
+The clever part is in the seams.
 
 ## Why this matters
 
