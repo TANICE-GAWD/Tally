@@ -12,13 +12,9 @@ That is what Tally does. The clever part is in the seams.
 
 ## Why this matters
 
-Most specialty trade contractors (framing crews, concrete crews, electricians, the kind of company that does one thing well and gets hired by general contractors) still track this on paper, or in Excel, or in a chat app, or in a back-office staffer's head. Once a week, somebody types it all into a payroll system. When something gets lost, or written down wrong, or remembered fuzzy, the certified-payroll report the contractor owes the GC on Friday is wrong. The invoice bounces. The crew does not get paid until the next pay period.
+Most specialty contractors still track labor on paper, in Excel, or in a foreman's head. When facts get lost, Friday's certified-payroll report is wrong, the invoice bounces, and the crew does not get paid on time.
 
-A worker who switches from framing ($65 per hour) to demolition ($48 per hour) for half a day, then crosses 40 hours that same week, is owed overtime on the FLSA weighted-average rate of the work they actually did. Not the rate they happened to be earning at hour 41. Excel does not catch this. A foreman remembering at the end of the week does not catch this.
-
-Tally catches the right facts at the moment they happen and writes them to a place that cannot be edited after the fact. It is not a payroll system. It is the structured data layer that makes a real payroll system possible.
-
-This is the same thesis Trayd's CEO Anna Berger has stated publicly: before AI or anything else can add value in construction back-office work, the underlying data has to actually exist and be trustworthy. Tally is one floor below that.
+A worker who switches from $65/hr framing to $48/hr demolition mid-day, then crosses 40 hours that week, is owed overtime on the FLSA weighted-average rate. Excel does not catch that. Tally does, because it captures every trade switch the moment it happens and writes to an append-only log a payroll system can trust. It is the data layer under a payroll system, not the payroll system itself. As Trayd's Anna Berger has said: before AI can add value here, the data underneath has to exist.
 
 ## What it is not
 
