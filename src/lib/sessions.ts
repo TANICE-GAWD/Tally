@@ -1,4 +1,5 @@
 import type { ClockEvent } from '@/types/db';
+import { formatCentsPlain } from './money';
 
 export interface Session {
   user_id: string;
@@ -104,17 +105,11 @@ export function toCsv(
         csvEscape(userLabel(r.user_id)),
         csvEscape(r.cost_code_label),
         r.hours.toFixed(2),
-        formatCsvCents(r.rate_cents_per_hour),
-        formatCsvCents(r.wages_cents)
+        formatCentsPlain(r.rate_cents_per_hour),
+        formatCentsPlain(r.wages_cents)
       ].join(',')
     );
   return [header, ...lines].join('\n');
-}
-
-function formatCsvCents(cents: number): string {
-  const sign = cents < 0 ? '-' : '';
-  const abs = Math.abs(Math.round(cents));
-  return `${sign}$${(abs / 100).toFixed(2)}`;
 }
 
 function csvEscape(s: string): string {

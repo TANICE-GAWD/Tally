@@ -47,15 +47,4 @@ export function applyWhatIf(
   };
 }
 
-export function formatCents(cents: number): string {
-  const sign = cents < 0 ? '-' : '';
-  const abs = Math.abs(Math.round(cents));
-  const dollars = Math.floor(abs / 100);
-  const rem = abs % 100;
-  const grouped = dollars.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-  return `${sign}$${grouped}.${rem.toString().padStart(2, '0')}`;
-}
-
-export function formatPct(pct: number, digits = 1): string {
-  return `${pct.toFixed(digits)}%`;
-}
+export { formatCents, formatPct } from './money';
