@@ -16,6 +16,7 @@
     "@react-native-community/netinfo": "11.4.1",
     "@supabase/supabase-js": "^2.45.4",
     "@turf/turf": "^7.1.0",
+    "dinero.js": "^1.9.1",
     "expo": "^54",
     "expo-asset": "~12.0.13",
     "expo-constants": "~18.0.13",
@@ -37,6 +38,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
+    "@types/dinero.js": "^1.9.4",
     "@types/react": "~19.1.10",
     "fast-check": "^3.23.1",
     "typescript": "~5.9.2",
