@@ -246,11 +246,6 @@ I planned to use zod for shared schemas between mobile and Edge Functions. Since
 - Expo SDK 54 introduced a peer dependency mismatch between `react` and `react-dom`. Plain `npm install` fails. I added an `.npmrc` with `legacy-peer-deps=true` so anyone cloning the repo gets a working install on the first try.
 - Reanimated 4 (which shipped with SDK 54) split its Babel plugin out into a separate package called `react-native-worklets`. The `babel.config.js` had to be updated to reference the new path. The first attempt to run the app failed on this until I traced the chain through the install logs.
 
-### Things only the operator can finish
-
-- Pushing to a public GitHub repo named Tally.
-- Recording the Loom demo (the airplane-mode offline-sync round-trip is the money shot).
-- An EAS preview build so recruiters can install the actual app instead of running it through Expo Go. Two hours of work, not done.
 
 ## Testing
 
@@ -329,36 +324,7 @@ Seeded accounts:
 | foreman@jobsite.test | password123 | foreman |
 | pm@jobsite.test | password123 | pm |
 
-## Demo script
 
-### Offline round-trip (the part to record)
-
-1. Sign in as `worker1@jobsite.test`.
-2. Turn airplane mode on.
-3. Tap Clock in, pick Framing. Status flips, dot is orange (pending).
-4. Tap Switch trade, pick Concrete. Two more orange events.
-5. Tap Clock out. One more orange event.
-6. Turn airplane mode off. Within 15 seconds all dots flip green.
-7. Confirm in Supabase Studio that `clock_events` has 4 new rows for that user.
-
-This is the demo. It is what proves the project actually does what the README promises.
-
-### Live dashboard
-
-1. Sign in on a second device (or re-login after sign-out) as `foreman@jobsite.test`. Tap Dashboard.
-2. On the first device, clock in and out as `worker1`. The dashboard's burn numbers move in real time without refresh.
-3. Move the Workers and Days steppers, pick a trade chip. The what-if panel recomputes immediately.
-4. Tap Export week CSV. System share sheet opens with a CSV ready to email.
-
-### Geofence auto-prompt
-
-The geofence demo is the trickiest to film because it requires GPS to cross a polygon boundary. Options, in order of preference:
-
-1. Android Emulator with extended location controls (built-in route simulator).
-2. Real Android phone with the Fake GPS Location app (Lexa) plus scrcpy mirroring to record.
-3. Walking around with the seeded polygon swapped to your actual address via a one-line SQL update.
-
-The polygon is seeded near 120 Liberty Street, Manhattan, because the test data is supposed to feel like a real project.
 
 ## Glossary
 
@@ -373,9 +339,7 @@ The polygon is seeded near 120 Liberty Street, Manhattan, because the test data 
 | FLSA | Fair Labor Standards Act. The federal law that says overtime is on weighted-average rate for multi-rate workers. |
 | Davis-Bacon | The 1931 federal act that requires prevailing wages on federally funded construction projects. |
 
-## Roadmap
-
-If I were continuing this work past four weekends, the order would be:
+## Future Roadmap
 
 1. True background geofencing. Build a development client with EAS, register a `TaskManager` task, replace the foreground-only watcher.
 2. Wage-determination ingestion. Pull from SAM.gov for federal projects and at least the New York and New Jersey state DOL feeds. Normalize into the existing cost-code shape. This is the bridge to actual prevailing-wage compliance.
@@ -384,4 +348,4 @@ If I were continuing this work past four weekends, the order would be:
 
 ## A note on what this is, ultimately
 
-Tally is one cold weekend's worth of construction-back-office product. It is not finished. Not deployed at scale, not field-tested with a real crew, not connected to a payroll system. What it is, hopefully, is a credible argument that the person who built it understands the problem space well enough to be useful at a company like Trayd from week one. Everything in it (the event sourcing, the multi-rate sessions, the geofencing, the RLS model, the property tests on money math) was a choice made because of something specific about how specialty trade contracting actually works. The code is the resume.
+Tally is one cold weekend's worth of construction-back-office product. It is not finished. Not deployed at scale, not field-tested with a real crew, not connected to a payroll system. What it is, hopefully, is a credible argument that the person who built it understands the problem space well enough to be useful at a company like Trayd from week one. Everything in it (the event sourcing, the multi-rate sessions, the geofencing, the RLS model, the prty tests on money math) was a choice made because of something specific about how specialty trade contracting actually works. The code is the resume.
