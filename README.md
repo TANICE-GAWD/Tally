@@ -248,7 +248,7 @@ I planned to use zod for shared schemas between mobile and Edge Functions. Since
 
 ### Things only the operator can finish
 
-- Pushing to a public GitHub repo. The repo currently lives at `github.com/TANICE-GAWD/Polyburn` and will be renamed to Tally.
+- Pushing to a public GitHub repo named Tally.
 - Recording the Loom demo (the airplane-mode offline-sync round-trip is the money shot).
 - An EAS preview build so recruiters can install the actual app instead of running it through Expo Go. Two hours of work, not done.
 
