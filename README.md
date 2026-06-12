@@ -2,6 +2,14 @@
 
 A phone app for construction crews and the people who pay them.
 
+## Demo
+
+A 3-minute walkthrough: auto clock-in by geofence, the offline round-trip through airplane mode, and the live foreman dashboard with what-if simulator and CSV export.
+
+<video src="public/Trayd_Tally_Prince_Demo.mp4" controls width="100%"></video>
+
+If the video does not render inline, open [`public/Trayd_Tally_Prince_Demo.mp4`](public/Trayd_Tally_Prince_Demo.mp4) directly.
+
 ## What it does
 
 A carpenter arrives at a jobsite. Tally detects they have crossed onto the site and prompts a clock-in. They pick a trade (Framing) and get to work. Mid-day they switch to Concrete. One tap. They leave the site, the app prompts them to clock out.
