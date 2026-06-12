@@ -6,9 +6,8 @@ A phone app for construction crews and the people who pay them.
 
 A 3-minute walkthrough: auto clock-in by geofence, the offline round-trip through airplane mode, and the live foreman dashboard with what-if simulator and CSV export.
 
-<video src="public/Trayd_Tally_Prince_Demo.mp4" controls width="100%"></video>
+https://github.com/user-attachments/assets/6b2dd7e0-469e-4247-a9da-56929639a919
 
-If the video does not render inline, open [`public/Trayd_Tally_Prince_Demo.mp4`](public/Trayd_Tally_Prince_Demo.mp4) directly.
 
 ## What it does
 
